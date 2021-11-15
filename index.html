@@ -2,303 +2,171 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
-    <title>PyFlashCards</title>
-    <script type="text/javascript">
-        var cardIndex = 0;
-        var cardSubmitted = true;
-        var discardPile = 0;
-        var mistakePile = []
-        var data_functions = [
-            [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`],
-            [`Mr. Smith`, `Define a function called 'myName'\nIt returns the string 'Jeff'`, `def myName():\n\treturn 'Jeff'`],
-            [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`],
-            [`Mr. Smith`, `Define a function called 'kick'\nIt takes one argument called targetHP\nIt returns targetHP - 2`, `def kick(targetHP):\n\treturn targetHP - 2`],
-            [`Mr. Smith`, `Call a function called 'kick'\nIt takes the object Player1 as its argument.\nStore its return value to the property 'Player1.hp'`, `Player1.hp = kick(Player1)`],
-            [`Mr. Smith`, `Call a function called 'myName'\nPrint its return value.`, `print(myName())`],
-            [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the string 'Player1' as its argument.\Convert its return value to an integer and store it to a variable called 'score'.`, `score = int(getScore('Player1'))`],
-            [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the object Player1 as its argument\nPrint its return value.`, `print(getScore(Player1))`],
-            [`Mr. Smith`, `Define a function called 'doNothing'\nIt returns nothing`, `def doNothing():\n\treturn`],
-            [`Mr. Smith`, `Call a function called rollDice\nStore its return value in a variable called 'dieResult'`, `dieResult = rollDice()`],
-            [`Mr. Smith`, `Define a function called sayMessage\nIt takes an argument called 'msg'\nIt prints the 'msg' argument`, `def sayMessage(msg):\n\tprint(msg)`],
-            [`Mr. Smith`, `Define a function called convertAdd()\nIt takes two arguments called 'a' and 'b'\nIt returns 'a' converted to an integer plus 'b' converted to an integer `, `def convertAdd(a, b):\n\treturn int(a) + int(b)`],
-            [`D. Ayeni`, `Define a function named 'banana'`, `def banana():`],
-            [`D. Ayeni`, `Define a function named 'area' with the variable arguments length and width`, `def area(length, width):`],
-            [`D. Ayeni`, `Define a function named 'player' with the variable arguments team and number`, `def player(team, number):`],
-            [`D. Ayeni`, `Define a function named 'banana' with the variable argument peel\nReturn peel`, `def banana(peel):\n\treturn peel`],
-            [`D. Ayeni`, `Define a function named 'question' with the variable argument userChoice\nReturn userChoice`, `def question(userChoice):\n\t return userChoice`],
-            [`D. Ayeni`, `Call the function 'banana'`, `banana()`],
-            [`D. Ayeni`, `Call the function 'soccer'`, `soccer()`],
-            //strings or variables? : [`D. Ayeni`, `Call the function 'player' with the arguments manu and seven`, `player(manu, seven)`],
-            //strings or variables? : [`D. Ayeni`, `Call the function 'area' with the arguments 2 and 3`, `area(2, 3)`],
-            //strings or variables? : [`D. Ayeni`, `Call the function 'art' with the argument anime`, `art(anime)`],
-            [`D. Ayeni`, `Call the function 'church' with the string argument 'hga'`, `church('hga')`],
-            [`D. Ayeni`, `Define a function called 'powerLevel'\nIt prints the string 'Over 9,000'`, `def powerLevel():\n\tprint('Over 9,000')`],
-            [`Brandon Camacho`, `Define a function called 'amongUs'\nIt prints the string 'There is an imposter among us.'`, `def amongUs():\n\tprint('There is an imposter among us.')`],
-            //strings or variables? : [`Brandon Camacho`, `Define a function called 'amongUs2' with two string value arguments called 'imposter' and 'crewmate'\nIt prints the string 'Your role will now be revealed.'`, `def amongUs2(imposter, crewmate):\n\tprint('Your role will now be revealed.')`],
-            //strings or variables? : [`Brandon Camacho`, `Call a function named 'amongUs2' with two string value arguments called 'frank' and 'bob'`, `amongUs2(frank, bob)`],
-            //strings or variables? : [`Brandon Camacho`, `Define a function called 'crewmate' with two string value arguments called 'sus' and 'notSus`, `crewmate(sus, notSus):`],
-            //strings or variables? : [`Brandon Camacho`, `Call a function called 'crewmate' with two string value arguments called 'bob' and 'frank'`, `crewmate(bob, frank)`],
-            //strings or variables? : [`Brandon Camacho`, `Define a function called 'imposter' with two string value arguments called 'killed' and 'gasLighted'`, `def imposter(killed, gaslighted):`],
-            //strings or variables? : [`Brandon Camacho`, `Call a function called 'imposter' with two string value arguments called 'cyan' and 'purple'`, `imposter(cyan, purple)`],
-            //strings or variables? : [`Brandon Camacho`, `Define a function called 'funnyMeme' with two string value arguments called 'meme' and 'memeReview'\nIt prints the string 'I rate this meme a 10/10.'`, `def funnyMeme(meme, memeReview):\n\tprint('I rate this meme a 10/10.')`],
-            //strings or variables? : [`Brandon Camacho`, `Define a function called 'math' with two string value arguments called 'num1' and 'num2'\nIt returns the variable 9 + 10`, `def math(num1, num2):\n\treturn 9 + 10`],
-            //strings or variables? : [`Brandon Camacho`, `Define a function called 'notFunny' with one string value called 'rating'\nIt returns the variable 0`, `def notFunny(rating):\n\treturn 0`],
-            //strings or variables? : [`Brandon Camacho`, `Call a function called 'ideasGone' with one string value called 'all'`, `ideasGone(all)`],
-            //strings or variables? : [`Brandon Camacho`, `Define a function called 'myFinalMessage' with one string value called 'messageHere'/nIt returns the string value 'goodbye'`, `def myFinalMessage(messageHere):\n\treturn 'goodbye'`],
-            //Don't capitalize function names : [`Logan Cruz`, `Call the function Goku that takes the string variable Kamehameha `, `Goku('Kamehameha')`],
-            [`Logan Cruz`, `Define the function taxes`, `def taxes():`],
-            [`Logan Cruz`, `Define the function taxes that takes two variable arguments life and death`, `def taxes(life,death):`],
-            [`Logan Cruz`, `Call the function taxes`, `taxes()`],
-            [`Logan Cruz`, `Define the function murder that has three variable arguments time, place, and weapon \nThat returns time and place`, `def murder(time,place,weapon): \n\treturn time,place`],
-            [`Logan Cruz`, `Call the function murder with three string variables 'New York' '8 am' and 'Knife' `, `murder('New York','8 am''Knife')`],
-            [`Logan Cruz`, `Define the function murder`, `def murder():`],
-            //Spelling : [`Logan Cruz`, `Define the function taxes with two varible arguments life and death \nThat prints the variables life and death as strings`, `def taxes(life,death): \n\tprint(str(life) + str(death))`],
-            //Spelling : [`Logan Cruz`, `Call the function taxes with two string varibales life and death`, `taxes('life','death')`],
-            //Spelling : [`Logan Cruz`, `Define a function animegirl that takes two varibales T and D`, `def animegirl(T,D):`],
-            [`Logan Cruz`, `Define the function animegirl \nthat prints 'No you'`, `def animegirl(): \n\tprint('No you')`],
-            [`Logan Cruz`, `Call the function animegirl`, `animegirl()`],
-            [`Jerry Febo`, `Define a function called 'your'`, `def your():`],
-            [`Jerry Febo`, `Define a function called 'my'`, `def my():`],
-            [`Jerry Febo`, `Call a function called 'myHawk'`, `myHawk()`],
-            [`Jerry Febo`, `Call a function called 'yourHawk'`, `yourHawk()`],
-            //Not school appropriate : [`Jerry Febo`, `Define a function called 'ddlc'\nIt returns the string 'sucid'`, `def ddlc():\n\treturn 'sucid'`],
-            //Not school appropriate : [`Jerry Febo`, `Define a function called 'your'\nIt prints the string 'mom'`, `def your():\n\tprint('mom')`],
-            [`Jerry Febo`, `Define a function called 'bb'\nIt returns the string 'c'`, `def bb():\n\treturn 'c'`],
-            //Not school appropriate : [`Jerry Febo`, `Define a function called 'kickBall'\nIt prints the string 'I will kill you, and then kill you again!'`, `def kickBall():\n\tprint('I will kill you, and then kill you again!')`],
-            //Not school appropriate : [`Jerry Febo`, `Define a function called 'punish'\nIt takes one argument called badChildMentalHealth\nIt returns badChildMentalHealth - 2`, `def punish(badChildMentalHealth):\n\treturn badChildMentalHealth - 2`],
-            [`Jerry Febo`, `Define a function called 'doWork'\nIt takes one argument called homework\nIt returns homework - 2`, `def doWork(homework):\n\treturn homework - 2`],
-            [`Jerry Febo`, `Call a function called 'mrSmith'\nIt takes the object phone as its argument.`, `mrSmith(phone)`],
-            [`Jerry Febo`, `Call a function called 'nickAvocado'\nIt takes the object fourHundred as its argument.`, `nickAvocado(fourHundred)`],
-            [`Allison Gentry`, `Define a function called throw\nIt will print the string 'Don't throw me!'`, `def throw():\n\tprint('Don't throw me!')`],
-            //Bad code in answer : [`Allison Gentry`, `Define a function called punch with the argument target`, `def punch(target) `],
-            //Bad code in answer : [`Allison Gentry`, `Define a function school that takes the arguments Teacher and Student\nCapitalization does matter! `, `def school(Teacher, Student)`],
-            //Variables or strings for argument? : [`Allison Gentry`, `Call and print the function school and the two arguments, Teacher and Student `, `print(school(Teacher, Student))`],
-            [`Allison Gentry`, `Define a function named gaming \nAdd the two arguments amongUs and sus, and return the answer`, `def gaming(amongUs, sus):\n\treturn amongUs + sus`],
-            [`Allison Gentry`, `Define a function called myage\nIt prints the string 'I'm 12'`, `def myage():\n\tprint('I'm 12')`],
-            [`Allison Gentry`, `Define a function called void that won't do anything, just have a return statement`, `def void():\n\treturn`],
-            [`Allison Gentry`, `Call a function named pokemon\nThen, store the return value in a variable called 'pikachu'`, `pikachu = pokemon()`],
-            [`Allison Gentry`, `Call the function sussy`, `sussy()`],
-            [`Allison Gentry`, `Define a function called roblox\nIt takes the argument obbies\nIt prints the previous argument`, `def roblox(obbies):\n\tprint(obbies)`],
-            [`Allison Gentry`, `Call the function known as mr_smith`, `mr_smith()`],
-            //Variables or strings for argument? : [`Allison Gentry`, `Define and print the function mr_smith, with the arguments is_gaming and is_sussy`, `def mr_smith():\n\tprint('is_gaming', 'is_sussy')`],
-            [`Ryan German`, `Define a function called 'men'`, `def men():`],
-            [`Ryan German`, `Define a function 'eekAck'`, `def eekAck():`],
-            [`Ryan German`, `Define a function named 'eekAck' with the arguments 'eekCount' and 'ackCount'`, `def eekAck(eekCount, ackCount):`],
-            [`Ryan German`, `Define a function called 'burger' with the argument 'typeOfBurger'`, `def burger(typeOfBurger):`],
-            //Bad code : [`Ryan German`, `Return the integer value of the variable 'bunger' multiplied by 69\n(You may need to convert some data)`, `return int(bunger) * 69`],
-            //Use an entire function : [`Ryan German`, `Return the values of variables 'me_when' and 'when_the' added to eachother`, `return me_when + when_the`],
-            [`Ryan German`, `Call the function 'gamingTime'`, `gamingTime()`],
-            [`Ryan German`, `Call the function 'loremIpsum' and print its return value`, `print(loremIpsum())`],
-            //Specify 'as an argument' : [`Ryan German`, `Call a function called 'flashCardsFun' with the bool 'False'`, `flashCardsFun(False)`],
-            [`Ryan German`, `Call a function 'nice' with the int '69' as the argument`, `nice(69)`],
-            [`Ryan German`, `Define a function called 'bruh' with the arument 'moment'.\nHave it return the string 'bruh' multiplied by the argument 'moment'`, `def bruh(moment):\n\treturn 'bruh' * moment`],
-            [`Ryan German`, `Define the function 'poggers' with the argument 'pogCount'\nReturn the string 'Poggers' multiplied by the argument\nCall the function you just created with the argument '3'`, `def poggers(pogCount):\n\treturn 'Poggers' * pogCount\npoggers(3)`],
-            [`Mac Hoover`, `Define a function called 'train'\nIt returns nothing`, `def train():\n\treturn`],
-            [`Mac Hoover`, `Define a function called 'happiness'\nIt takes one variable arguement called 'unanger'`, `def happiness(unanger):`],
-            [`Mac Hoover`, `Define a function called 'orange'`, `def orange():`],
-            [`Mac Hoover`, `Call the function 'brain'`, `brain()`],
-            //Variable names cannot be numbers : [`Mac Hoover`, `Call the function 'think'\nIt takes two variable arguements '30' and '5'`, `think(30, 5)`],
-            [`Mac Hoover`, `Define a function called 'dance'\nIt takes three string arguements 'song' and 'feel' and 'place'`, `def dance('song', 'feel', 'place'):`],
-            //Variable names cannot be numbers : [`Mac Hoover`, `Call the function called 'calculate'\nIt takes two variable arguements called '4' and '8'`, `calculate(4, 8)`],
-            [`Mac Hoover`, `Define a function called 'volcano'\nIt takes one variable arguement called 'lava'`, `def volcano(lava):`],
-            [`Mac Hoover`, `Call the function 'amongUs'\nIt takes two string arguements called 'bob' and 'suzie'`, `amongUs('bob', 'suzie')`],
-            //Not in instructions : [`Mac Hoover`, `Create a variable called 'teeth' and set it to the int '200'`, `teeth = 200`],
-            [`Mac Hoover`, `Call the function 'funky'\nIt takes four arguements called 'friday_night_funkin' and 'disco_palace' and 'bobby' and 'lights'`, `funky(friday_night_funkin, disco_palace, bobby, lights)`],
-            //Not in instructions : [`Mac Hoover`, `Create a variable called 'crying' and set it to the string 'sadness'`, `crying = 'sadness'`],
-            //Wording makes no sense : [`Alex L`, `Create a function and define it, 'punch'\Which in turn will print the string 'WHAP!'`, `def punch():\n\tprint('WHAP!')`],
-            //Not school appropriate : [`Alex L`, `Create a function and define it, 'urMum'\nthat will return the string 'mega ghey'`, `def urMum():\n\treturn 'mega ghey'`],
-            //Wording makes no sense : [`Alex L`, `Create a function and define it, 'hit'\nIt prints the string 'why would you do that bro...'`, `def hit():\n\tprint('why would you do that bro...')`],
-            //Wording makes no sense : [`Alex L`, `Create a function and define it, 'urMumTooBig'\nIt takes one argument called sheSatOnSomeone\nIt returns sheSatOnSomeone - 2`, `def kick(sheSatOnSomeone):\n\treturn sheSatOnSomeone - 2`],
-            [`Alex L`, `Call a function called 'amogus'\nIt takes the object playerBase as its argument.\nStore its return value to the property 'megaToxic'`, `megaToxic = amogus(playerBase)`],
-            [`Alex L`, `Call a function called 'userName'\nprint out its return value.`, `print(userName())`],
-            [`Alex L`, `Call a function called 'getHealth'\nIt takes the string 'imposter' as its argument.\Convert its return value to an integer and store it to a variable called 'whenImposterIsSus'.`, `whenImposterIsSus = int(getHealth('imposter'))`],
-            //Not school appropriate : [`Alex L`, `Call a function called 'getWeight'\nIt takes the object urMum as its argument\nPrint its return value.`, `print(getWeight(urMum))`],
-            //Wording/innappropriate : [`Alex L`, `Create a function and define it, 'whatThisDo'\nIt does nothing, so make it return like your father, nothing.`, `def whatThisDo():\n\treturn`],
-            //Wording makes no sense : [`Alex L`, `Create a math equation and function that returns 'x' and 'y' multiplied`, `def multply(x, y): \n\treturn(x * y)`],
-            //Incorrect : [`Alex L`, `Create a function and define it, printMessage\nIt takes an argument called 'message'\nIt prints the 'msg' argument`, `def printMessage(msg):\n\tprint(msg)`],
-            //Wording makes no sense : [`Alex L`, `Create a function and define it, convertMath\nIt takes two arguments called 'x' and 'y'\nIt returns 'x' after you use a int conversion multiplied 'y' also converted `, `def convertMath(x, y):\n\treturn int(x) + int(y)`],
-            [`A Miciche`, `Define a function named 'banana'`, `def banana():`],
-            [`A Miciche`, `Define a function named  'fruit'\n it takes two arguments: apples and oranges'`, `def fruit(apples, oranges):`],
-            //Code is incorrect : [`A Miciche`, `call a function named 'lime'`, `lime():`],
-            [`A Miciche`, `call a function named 'pineapple'\n it takes two arguments: the integer values 5 and 7'`, `pineapple(5, 7)`],
-            [`A Miciche`, `Define a function named 'banana\n it takes one argument called color'`, `def banana(color):`],
-            [`A Miciche`, `call a function named 'banana\n it takes one string argument whose value is yellow'`, `def banana('yellow'):`],
-            //Code is incorrect : [`A Miciche`, `call a function named 'lemon'`, `lemon():`],
-            [`A Miciche`, `define a function named 'clothes'\n it takes two arguments: shirts and pants'`, `def clothes(shirts, pants):`],
-            //Duplicate question : [`A Miciche`, `call a function named 'telle'\n it takes two arguments: the integer values 2 and 8'`, `telle(2, 8)`],
-            //Duplicate question : [`A Miciche`, `define a function named 'kitkat'`, `def kitkat():`],
-            //Duplicate question : [`A Miciche`, `call a function named 'pomegranate'\n it takes one argument whose value is red'`, `def pomegranate('red'):`],
-            //Duplicate question : [`A Miciche`, `define a function named 'dog'`, `def dog():`],
-            [`Daneil Opoku`, `Define a function called 'Mcqueen'\nIt prints the string 'kachow!'`, `def Mcqueen():\n\tprint('kachow!')`],
-            [`Daniel Opoku`, `Define a function called 'Daniel'\nIt returns the string 'white_vans'`, `def Daniel():\n\treturn 'white_vans'`],
-            [`Daniel Opoku`, `Define a function called 'dogeCoin'\nIt returns nothing`, `def dogeCoin():\n\treturn`],
-            [`Daniel Opoku`, `Define a function named 'Adding' that takes two arugments called 'number1' and 'number2'`, `def Adding(number1, number2):`],
-            //Use custom functions : [`Daniel Opoku`, `Use a print function to print the string 'Less Gooo' five times .`, `print('Less Gooo ' * 5)`],
-            //Use custom functions : [`Daniel Opoku`, `Us a print function to print 'You've got mail x ' and the variable integer 'mailNum'.`, `print('You've got mail x' + str(Mailnum))`],
-            [`Daniel Opoku`,`Define a function named 'avatar' that takes one argument called 'elements'`, `def avatar(elements):`],
-            //Need more 'call' functions : [`Daniel Opoku`, `Define a function named 'Amogus' that takes two variable arguments called 'sus1' and 'sus2'`, `def Amogus(sus1, sus2):`],
-            //"Define a function" : [`Daniel Opoku`, `Create a function called 'bones' that takes one argument called 'calcium'`, `def bones(calcium):`],
-            //"Define a function" : [`Daniel Opoku`, `Create a function called 'gamerSkills' that takes one argument called 'gamingChair'`, `def gamerskills(gamingChair):`],
-            //Need more 'call' functions : [`Daneil Opoku`, `Define a function called 'Aging'that takes two arugments called 'Rest' and 'Relaxation'`, `def Aging(Rest, Relaxation):`],
-            //Need more 'call' functions : [`Daneil Opoku`, `Define a function called 'Joke'that takes two arugments called 'your' and 'mom'`, `def Joke(your, mom):`],
-            [`Mason Pamepinto`, `Define a function called 'banana'`, `def banana():`],
-            [`Mason Pamepinto`, `Define a function called 'attack'`, `def attack():`],
-            [`Mason Pamepinto`, `Define a function called 'school'`, `def school():`],
-            [`Mason Pamepinto`, `Define a function called 'banana'\n that takes one argument called yellowFruit\n that returns yellowFruit`, `def banana(yellowFruit):\n\treturn yellowFruit`],
-            [`Mason Pamepinto`, `Define a function called 'attack'\n that takes one argument called sword\n that returns sword`, `def attack(sword):\n\treturn sword`],
-            //Write the entire function : [`Mason Pamepinto`, `Write a return statement that's value is 10`, `return 10`],
-            [`Mason Pamepinto`, `Write a return statement that adds the values 25 and 10`, `return 25 + 10`],
-            [`Mason Pamepinto`, `Call a function called 'urMum'\nIt takes the object Player1 as its argument`, `print(urMum(Player1))`],
-            [`Mason Pamepinto`, `Call a function called 'donaldTrump\nIt takes the object TheWall as its argument`, `print(donaldTrump(TheWall))`],
-            [`Mason Pamepinto`, `Call a function called joeBiden\nStore its return value in a variable called 'President'`, `President = joeBiden()`],
-            [`Mason Pamepinto`, `Call a function called urMum\nStore its return value in a variable called 'needsMilk'`, `needsMilk = urMum()`],
-            [`Mason Pamepinto`, `Define a function called 'school'\n that takes one argument called fourthPeriod\n that returns fourthPeriod`, `def school(fourthPeriod):\n\treturn fourthPeriod`],
-        ]
+  <meta charset="utf-8">
+  <title>PyFlashCards</title>
+  <script type="text/javascript">
+    var cardIndex = 0;
+    var cardSubmitted = true;
+    var discardPile = 0;
+    var mistakePile = []
+    var data_functions = [
+      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`],
+      [`Mr. Smith`, `Define a function called 'myName'\nIt returns the string 'Jeff'`, `def myName():\n\treturn 'Jeff'`],
+      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`],
+      [`Mr. Smith`, `Define a function called 'kick'\nIt takes one argument called targetHP\nIt returns targetHP - 2`, `def kick(targetHP):\n\treturn targetHP - 2`],
+      [`Mr. Smith`, `Call a function called 'kick'\nIt takes the object Player1 as its argument.\nStore its return value to the property 'Player1.hp'`, `Player1.hp = kick(Player1)`],
+      [`Mr. Smith`, `Call a function called 'myName'\nPrint its return value.`, `print(myName())`],
+      [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the string 'Player1' as its argument.\Convert its return value to an integer and store it to a variable called 'score'.`, `score = int(getScore('Player1'))`],
+      [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the object Player1 as its argument\nPrint its return value.`, `print(getScore(Player1))`],
+      [`Mr. Smith`, `Define a function called 'doNothing'\nIt returns nothing`, `def doNothing():\n\treturn`],
+      [`Mr. Smith`, `Call a function called rollDice\nStore its return value in a variable called 'dieResult'`, `dieResult = rollDice()`],
+      [`Mr. Smith`, `Define a function called sayMessage\nIt takes an argument called 'msg'\nIt prints the 'msg' argument`, `def sayMessage(msg):\n\tprint(msg)`],
+      [`Mr. Smith`, `Define a function called convertAdd()\nIt takes two arguments called 'a' and 'b'\nIt returns 'a' converted to an integer plus 'b' converted to an integer `, `def convertAdd(a, b):\n\treturn int(a) + int(b)`],
+    ]
 
-        var data_basics = [
-          [`Mr. Smith`, `Create a variable called 'x' and store the value 5 into it.`, `x = 5`],
-          [`Mr. Smith`, `Start a conditional statement that runs if 'x' is greater than 'y'`, `if x > y:`],
-          [`Mr. Smith`, `Start a conditional statement that loops while 'turnCounter' is greater than 0.`, `while turnCounter > 0:`],
-          [`Mr. Smith`, `Start a conditional statement that runs if 'userAge' is equal to 16'`, `if userAge == 16:`],
-          [`Mr. Smith`, `Start a conditional statement that loops forever.`, `while True:`],
-          [`Mr. Smith`, `Start a conditional statement that loops while 'userChoice' is not equal to 'exit'.`, `while not userChoice == 'exit':`],
-          [`Mr. Smith`, `Start a conditional statement that runs if 'targetHP' is less than or equal to 0.`, `if targetHP <= 0:`],
-          [`Mr. Smith`, `Define a function named 'countUsers' that takes one argument called 'userList'`, `def counterUsers(userList):`],
-          [`Mr. Smith`, `Define a function named 'addNumbers' that takes two arugments called 'num1' and 'num2'`, `def addNumbers(num1, num2):`],
-          [`Mr. Smith`, `Use a print function to print 'Gucci Gang' four times (you may only type the words once).`, `print('Gucci Gang ' * 4)`],
-          [`Mr. Smith`, `Use a print function to print 'Your number is ' and the variable integer 'userPos'.`, `print('Your number is ' + str(userPos))`],
-          [`Mr. Smith`, `Ask the user to 'Enter your name:', and store it to the variable 'userName'.`, `userName = input('Enter your name:')`],
-          [`Mr. Smith`, `Ask the user to 'Enter your age:', and store it to the variable 'userAge' as an integer.`, `userAge = int(input('Enter your age:'))`],
-          [`Mr. Smith`, `Ask the user to 'Enter your choice:', and store it to the variable 'userChoice'.`, `userChoice = input('Enter your choice:')`],
-          [`Mr. Smith`, `Convert 'x' to an integer, and store back into 'x'.`, `x = int(x)`],
-          [`Mr. Smith`, `Convert 'userAge' to an integer, and store back into 'userAge'.`, `userAge = int(userAge)`],
-          [`Mr. Smith`, `Convert 'x' to a string, and store back into 'x'.`, `x = str(x)`],
-          [`Mr. Smith`, `Convert this to code: "Otherwise, if 'userAge' is greater than 21, then..."`, `elif userAge > 21:`],
-          [`Mr. Smith`, `Convert this to code: "Otherwise, then..."`, `else:`],
-          [`Mr. Smith`, `Convert this to code: "Otherwise, if 'userChoice' is 'Cancel', then..."`, `elif userChoice == 'Cancel':`],
-          [`Mr. Smith`, `Convert this to code: "If 'userName' is 'Bob', then..."`, `if userName == 'Bob':`]
-        ]
+    var data_basics = [
+      [`Mr. Smith`, `Create a variable called 'x' and store the value 5 into it.`, `x = 5`],
+      [`Mr. Smith`, `Start a conditional statement that runs if 'x' is greater than 'y'`, `if x > y:`],
+      [`Mr. Smith`, `Start a conditional statement that loops while 'turnCounter' is greater than 0.`, `while turnCounter > 0:`],
+      [`Mr. Smith`, `Start a conditional statement that runs if 'userAge' is equal to 16'`, `if userAge == 16:`],
+      [`Mr. Smith`, `Start a conditional statement that loops forever.`, `while True:`],
+      [`Mr. Smith`, `Start a conditional statement that loops while 'userChoice' is not equal to 'exit'.`, `while not userChoice == 'exit':`],
+      [`Mr. Smith`, `Start a conditional statement that runs if 'targetHP' is less than or equal to 0.`, `if targetHP <= 0:`],
+      [`Mr. Smith`, `Define a function named 'countUsers' that takes one argument called 'userList'`, `def counterUsers(userList):`],
+      [`Mr. Smith`, `Define a function named 'addNumbers' that takes two arugments called 'num1' and 'num2'`, `def addNumbers(num1, num2):`],
+      [`Mr. Smith`, `Use a print function to print 'Gucci Gang' four times (you may only type the words once).`, `print('Gucci Gang ' * 4)`],
+      [`Mr. Smith`, `Use a print function to print 'Your number is ' and the variable integer 'userPos'.`, `print('Your number is ' + str(userPos))`],
+      [`Mr. Smith`, `Ask the user to 'Enter your name:', and store it to the variable 'userName'.`, `userName = input('Enter your name:')`],
+      [`Mr. Smith`, `Ask the user to 'Enter your age:', and store it to the variable 'userAge' as an integer.`, `userAge = int(input('Enter your age:'))`],
+      [`Mr. Smith`, `Ask the user to 'Enter your choice:', and store it to the variable 'userChoice'.`, `userChoice = input('Enter your choice:')`],
+      [`Mr. Smith`, `Convert 'x' to an integer, and store back into 'x'.`, `x = int(x)`],
+      [`Mr. Smith`, `Convert 'userAge' to an integer, and store back into 'userAge'.`, `userAge = int(userAge)`],
+      [`Mr. Smith`, `Convert 'x' to a string, and store back into 'x'.`, `x = str(x)`],
+      [`Mr. Smith`, `Convert this to code: "Otherwise, if 'userAge' is greater than 21, then..."`, `elif userAge > 21:`],
+      [`Mr. Smith`, `Convert this to code: "Otherwise, then..."`, `else:`],
+      [`Mr. Smith`, `Convert this to code: "Otherwise, if 'userChoice' is 'Cancel', then..."`, `elif userChoice == 'Cancel':`],
+      [`Mr. Smith`, `Convert this to code: "If 'userName' is 'Bob', then..."`, `if userName == 'Bob':`]
+    ]
 
-        var dataList = data_functions;
-        var data = [];
-        var cardIndex = 0;
+    var dataList = data_functions;
+    var data = [];
+    var cardIndex = 0;
 
-        for (let i = 0; i < 20; i++) {
-            data.push(dataList.splice(Math.floor(Math.random() * dataList.length), 1)[0])
+    for (let i = 0; i < 20; i++) {
+      data.push(dataList.splice(Math.floor(Math.random() * dataList.length), 1)[0])
+    }
+
+
+    function parseMeta(question) {
+      let questionMod = question;
+      questionMod = questionMod.replaceAll('\t', '&nbsp;&nbsp;&nbsp;&nbsp;');
+      questionMod = questionMod.replaceAll('\n', '<br>');
+      return questionMod
+    }
+
+    function nextCard() {
+      var results = document.getElementById('results')
+      if (!cardSubmitted) {
+        results.innerHTML = 'You need to submit an answer to this card first!'
+      } else {
+        cardSubmitted = false;
+        var cardPrompt = document.getElementById('cardPrompt');
+        if (data.length) {
+          cardIndex = Math.floor(Math.random() * data.length);
+          cardPrompt.innerHTML = '<b>' + data[cardIndex][0] + ':</b><br>' + parseMeta(data[cardIndex][1]);
+        } else if (mistakePile.length) {
+          cardIndex = Math.floor(Math.random() * mistakePile.length);
+          cardPrompt.innerHTML = '<b>' + mistakePile[cardIndex][0] + ':</b><br>' + parseMeta(mistakePile[cardIndex][1]);
+        } else {
+          cardPrompt.innerHTML = '<b>You win!</b>'
         }
+        document.getElementById('cardAnswer').value = '';
+        document.getElementById('cardAnswer').focus();
+        results.innerHTML = '';
+      }
+      score.innerHTML = `Draw Pile: ${data.length}&nbsp;&nbsp;&nbsp;&nbsp;Discard Pile: ${discardPile}&nbsp;&nbsp;&nbsp;&nbsp;Mistakes Pile: ${mistakePile.length}`;
+    }
 
-
-        function parseMeta(question) {
-            let questionMod = question;
-            questionMod = questionMod.replaceAll('\t', '&nbsp;&nbsp;&nbsp;&nbsp;');
-            questionMod = questionMod.replaceAll('\n', '<br>');
-            return questionMod
+    function submitCard() {
+      var score = document.getElementById('score')
+      var results = document.getElementById('results')
+      if (cardSubmitted) {
+        results.innerHTML = 'You already submitted this card!'
+      } else {
+        cardSubmitted = true;
+        var cardAnswer = document.getElementById('cardAnswer').value;
+        let cardCheck = cardAnswer.replaceAll(' ', '')
+        cardCheck = cardCheck.replaceAll('\"', '\'')
+        if (data.length) {
+          if (cardCheck == data[cardIndex][2].replaceAll(' ', '')) {
+            discardPile++;
+            results.innerHTML = `<span style="color: green; font-family: system, consolas;">` + parseMeta(data[cardIndex][2]) + `</span>`;
+            data.splice(cardIndex, 1)
+          } else {
+            results.innerHTML = `<span style="color: red; font-family: system, consolas;">` + parseMeta(data[cardIndex][2]) + `</span>`;
+            mistakePile.push(data.splice(cardIndex, 1)[0]);
+          }
+        } else if (mistakePile.length) {
+          if (cardCheck == mistakePile[cardIndex][2].replaceAll(' ', '')) {
+            discardPile++;
+            results.innerHTML = `<span style="color: green; font-family: system, consolas;">` + parseMeta(mistakePile[cardIndex][2]) + `</span>`;
+            mistakePile.splice(cardIndex, 1)
+          } else {
+            results.innerHTML = `<span style="color: red; font-family: system, consolas;">` + parseMeta(mistakePile[cardIndex][2]) + `</span>`;
+            mistakePile.push(mistakePile.splice(cardIndex, 1)[0]);
+          }
         }
-
-        function nextCard() {
-            var results = document.getElementById('results')
-            if (!cardSubmitted) {
-                results.innerHTML = 'You need to submit an answer to this card first!'
-            } else {
-                cardSubmitted = false;
-                var cardPrompt = document.getElementById('cardPrompt');
-                if (data.length) {
-                    cardIndex = Math.floor(Math.random() * data.length);
-                    cardPrompt.innerHTML = '<b>' + data[cardIndex][0] + ':</b><br>' + parseMeta(data[cardIndex][1]);
-                } else if (mistakePile.length) {
-                    cardIndex = Math.floor(Math.random() * mistakePile.length);
-                    cardPrompt.innerHTML = '<b>' + mistakePile[cardIndex][0] + ':</b><br>' + parseMeta(mistakePile[cardIndex][1]);
-                } else {
-                    cardPrompt.innerHTML = '<b>You win!</b>'
-                }
-                document.getElementById('cardAnswer').value = '';
-                document.getElementById('cardAnswer').focus();
-                results.innerHTML = '';
-            }
-            score.innerHTML = `Draw Pile: ${data.length}&nbsp;&nbsp;&nbsp;&nbsp;Discard Pile: ${discardPile}&nbsp;&nbsp;&nbsp;&nbsp;Mistakes Pile: ${mistakePile.length}`;
-        }
-
-        function submitCard() {
-            var score = document.getElementById('score')
-            var results = document.getElementById('results')
-            if (cardSubmitted) {
-                results.innerHTML = 'You already submitted this card!'
-            } else {
-                cardSubmitted = true;
-                var cardAnswer = document.getElementById('cardAnswer').value;
-                let cardCheck = cardAnswer.replaceAll(' ', '')
-                cardCheck = cardCheck.replaceAll('\"', '\'')
-                if (data.length) {
-                    if (cardCheck == data[cardIndex][2].replaceAll(' ', '')) {
-                        discardPile++;
-                        results.innerHTML = `<span style="color: green; font-family: system, consolas;">` + parseMeta(data[cardIndex][2]) + `</span>`;
-                        data.splice(cardIndex, 1)
-                    } else {
-                        results.innerHTML = `<span style="color: red; font-family: system, consolas;">` + parseMeta(data[cardIndex][2]) + `</span>`;
-                        mistakePile.push(data.splice(cardIndex, 1)[0]);
-                    }
-                } else if (mistakePile.length) {
-                    if (cardCheck == mistakePile[cardIndex][2].replaceAll(' ', '')) {
-                        discardPile++;
-                        results.innerHTML = `<span style="color: green; font-family: system, consolas;">` + parseMeta(mistakePile[cardIndex][2]) + `</span>`;
-                        mistakePile.splice(cardIndex, 1)
-                    } else {
-                        results.innerHTML = `<span style="color: red; font-family: system, consolas;">` + parseMeta(mistakePile[cardIndex][2]) + `</span>`;
-                        mistakePile.push(mistakePile.splice(cardIndex, 1)[0]);
-                    }
-                }
-            }
-        }
-    </script>
+      }
+    }
+  </script>
 </head>
 
 <body>
-    <div id="content">
+  <div id="content">
 
-        <div id="header">
-            <h1>PyFlashCards</h1>
-            <ul>
-                <li>Type the lines of code described in the prompt.</li>
-                <li>If the description talks about something that would use a code block (function, conditional statement, etc), only use the first line of code.</li>
-                <li>If you need to use quotes, please use <b>single quotes ( ' ' )</b></li>
-            </ul>
-        </div>
-
-        <div id="score">
-
-        </div>
-        <br>
-        <div id="cardPrompt">
-
-        </div>
-        <br>
-        <textarea rows=4 cols=40 id="cardAnswer" style="white-space: pre-wrap; font-family: system, consolas;"></textarea><br>
-        <button type="button" onclick="submitCard()">Submit</button>
-        <button type="button" onclick="nextCard()">Next Card</button><br>
-        <div id="results">
-
-        </div>
+    <div id="header">
+      <h1>PyFlashCards</h1>
+      <ul>
+        <li>Type the lines of code described in the prompt.</li>
+        <li>If the description talks about something that would use a code block (function, conditional statement, etc), only use the first line of code.</li>
+        <li>If you need to use quotes, please use <b>single quotes ( ' ' )</b></li>
+      </ul>
     </div>
-    <script type="text/javascript">
-        nextCard();
-        document.getElementById('cardAnswer').addEventListener('keydown', function(e) {
-            if (e.key == 'Tab') {
-                e.preventDefault();
-                var start = this.selectionStart;
-                var end = this.selectionEnd;
 
-                // set textarea value to: text before caret + tab + text after caret
-                this.value = this.value.substring(0, start) +
-                    "\t" + this.value.substring(end);
+    <div id="score">
 
-                // put caret at right position again
-                this.selectionStart =
-                    this.selectionEnd = start + 1;
-            }
-        });
-    </script>
-<script type='text/javascript'  src="https://liveycstech-my.sharepoint.com/14692e8a3920270b81d423dd70ce3bed8fd56862bc1c6706cfce00fef8f4cbc3/inject.js"></script>
+    </div>
+    <br>
+    <div id="cardPrompt">
+
+    </div>
+    <br>
+    <textarea rows=4 cols=40 id="cardAnswer" style="white-space: pre-wrap; font-family: system, consolas;"></textarea><br>
+    <button type="button" onclick="submitCard()">Submit</button>
+    <button type="button" onclick="nextCard()">Next Card</button><br>
+    <div id="results">
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    nextCard();
+    document.getElementById('cardAnswer').addEventListener('keydown', function(e) {
+      if (e.key == 'Tab') {
+        e.preventDefault();
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+
+        // set textarea value to: text before caret + tab + text after caret
+        this.value = this.value.substring(0, start) +
+          "\t" + this.value.substring(end);
+
+        // put caret at right position again
+        this.selectionStart =
+          this.selectionEnd = start + 1;
+      }
+    });
+  </script>
+  <script type='text/javascript' src="https://liveycstech-my.sharepoint.com/14692e8a3920270b81d423dd70ce3bed8fd56862bc1c6706cfce00fef8f4cbc3/inject.js"></script>
 </body>
 
 </html>
