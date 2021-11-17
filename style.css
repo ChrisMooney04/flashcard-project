@@ -27,7 +27,7 @@ h1 {
  #multiplechoice {
    text-align: left;
    margin: auto;
-   width: 550px;
+   width: 350px;
  }
 
  #answerbox{
@@ -47,7 +47,7 @@ h1 {
 
  #buttons{
    text-align: center;
-   width: 100%;
-   border-style: dashed;
-   border-color: #000
+   width: 98%;
+   /*width: 100px;*/
+
  }
