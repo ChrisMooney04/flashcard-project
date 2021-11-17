@@ -131,6 +131,7 @@
         results.innerHTML = 'You already submitted this card!'
       } else {
         cardSubmitted = true;
+
       }
     }
 
@@ -143,9 +144,6 @@
       } else if (data[cardIndex][3] === '1') {
         answerBox.style.display = "none"
         multChoiceBtn.style.display = "block"
-      }
-      else {
-        return
       }
     }
   </script>
@@ -185,10 +183,8 @@
         <br>
         <input type="radio" name="choice" value="None of These"> None of These
       </form>
-       <div id="buttons">
       <button type="button" onclick="submitCard()">Submit</button>
-      <button type="button" onclick="nextCard()">Next Card</button>
-    </div>
+      <button type="button" onclick="nextCard()">Next Card</button><br>
       <div id="results">
 
       </div>
