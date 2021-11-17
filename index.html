@@ -10,10 +10,10 @@
     var discardPile = 0;
     var mistakePile = []
     var data_functions = [
-      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '0'],
-      [`Mr. Smith`, `Define a function called 'myName'\nIt returns the string 'Jeff'`, `def myName():\n\treturn 'Jeff'`, '0'],
-      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '0'],
-      [`Mr. Smith`, `Define a function called 'kick'\nIt takes one argument called targetHP\nIt returns targetHP - 2`, `def kick(targetHP):\n\treturn targetHP - 2`, '0'],
+      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '1'],
+      [`Mr. Smith`, `Define a function called 'myName'\nIt returns the string 'Jeff'`, `def myName():\n\treturn 'Jeff'`, '1'],
+      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '1'],
+      [`Mr. Smith`, `Define a function called 'kick'\nIt takes one argument called targetHP\nIt returns targetHP - 2`, `def kick(targetHP):\n\treturn targetHP - 2`, '1'],
       [`Mr. Smith`, `Call a function called 'kick'\nIt takes the object Player1 as its argument.\nStore its return value to the property 'Player1.hp'`, `Player1.hp = kick(Player1)`, '0'],
       [`Mr. Smith`, `Call a function called 'myName'\nPrint its return value.`, `print(myName())`, '0'],
       [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the string 'Player1' as its argument.\Convert its return value to an integer and store it to a variable called 'score'.`, `score = int(getScore('Player1'))`, '0'],
@@ -144,9 +144,6 @@
         answerBox.style.display = "none"
         multChoiceBtn.style.display = "block"
       }
-      else {
-        return
-      }
     }
   </script>
 </head>
@@ -172,9 +169,7 @@
     <br>
     <div id="answerbox">
     <textarea rows=4 cols=40 id="cardAnswer" style="white-space: pre-wrap; font-family: system, consolas;"></textarea><br>
-    <button type="button" onclick="submitCard()">Submit</button>
-    <button type="button" onclick="nextCard()">Next Card</button><br>
-  </div>
+    </div>
     <div id="multiplechoice">
       <form >
         <input type="radio" name="choice" value="Scripting">
@@ -185,14 +180,14 @@
         <br>
         <input type="radio" name="choice" value="None of These"> None of These
       </form>
-       <div id="buttons">
+    </div>
+    <div id="buttons">
       <button type="button" onclick="submitCard()">Submit</button>
       <button type="button" onclick="nextCard()">Next Card</button>
     </div>
       <div id="results">
 
       </div>
-  </div>
   </div>
   <script type="text/javascript">
     nextCard();
