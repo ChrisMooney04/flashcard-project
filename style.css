@@ -23,3 +23,31 @@ h1 {
    text-align: left;
    margin-left: 20px;
  }
+
+ #multiplechoice {
+   text-align: left;
+   margin: auto;
+   width: 550px;
+ }
+
+ #answerbox{
+   text-align: center;
+   margin: auto;
+   width: 550px;
+   position: absolute;
+   width: 99%;
+ }
+
+ #cardPrompt {
+   text-align: center;
+   position: absolute;
+   width: 99%;
+   padding: 50px 0;
+ }
+
+ #buttons{
+   text-align: center;
+   width: 100%;
+   border-style: dashed;
+   border-color: #000
+ }
