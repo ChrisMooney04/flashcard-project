@@ -10,19 +10,19 @@
     var discardPile = 0;
     var mistakePile = []
     var data_functions = [
-      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '0'],
-      [`Mr. Smith`, `Define a function called 'myName'\nIt returns the string 'Jeff'`, `def myName():\n\treturn 'Jeff'`, '0'],
-      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '0'],
-      [`Mr. Smith`, `Define a function called 'kick'\nIt takes one argument called targetHP\nIt returns targetHP - 2`, `def kick(targetHP):\n\treturn targetHP - 2`, '0'],
-      [`Mr. Smith`, `Call a function called 'kick'\nIt takes the object Player1 as its argument.\nStore its return value to the property 'Player1.hp'`, `Player1.hp = kick(Player1)`, '0'],
-      [`Mr. Smith`, `Call a function called 'myName'\nPrint its return value.`, `print(myName())`, '0'],
-      [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the string 'Player1' as its argument.\Convert its return value to an integer and store it to a variable called 'score'.`, `score = int(getScore('Player1'))`, '0'],
-      [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the object Player1 as its argument\nPrint its return value.`, `print(getScore(Player1))`, '0'],
-      [`Mr. Smith`, `Define a function called 'doNothing'\nIt returns nothing`, `def doNothing():\n\treturn`, '0'],
-      [`Mr. Smith`, `Call a function called rollDice\nStore its return value in a variable called 'dieResult'`, `dieResult = rollDice()`, '0'],
-      [`Mr. Smith`, `Define a function called sayMessage\nIt takes an argument called 'msg'\nIt prints the 'msg' argument`, `def sayMessage(msg):\n\tprint(msg)`, '0'],
-      [`Mr. Smith`, `Define a function called convertAdd()\nIt takes two arguments called 'a' and 'b'\nIt returns 'a' converted to an integer plus 'b' converted to an integer `, `def convertAdd(a, b):\n\treturn int(a) + int(b)`, '0'],
-      ['Ethan', 'Nice', ['A', 'B', 'C', 'D'], '1', '3']
+      // [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '0'],
+      // [`Mr. Smith`, `Define a function called 'myName'\nIt returns the string 'Jeff'`, `def myName():\n\treturn 'Jeff'`, '0'],
+      // [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '0'],
+      // [`Mr. Smith`, `Define a function called 'kick'\nIt takes one argument called targetHP\nIt returns targetHP - 2`, `def kick(targetHP):\n\treturn targetHP - 2`, '0'],
+      // [`Mr. Smith`, `Call a function called 'kick'\nIt takes the object Player1 as its argument.\nStore its return value to the property 'Player1.hp'`, `Player1.hp = kick(Player1)`, '0'],
+      // [`Mr. Smith`, `Call a function called 'myName'\nPrint its return value.`, `print(myName())`, '0'],
+      // [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the string 'Player1' as its argument.\Convert its return value to an integer and store it to a variable called 'score'.`, `score = int(getScore('Player1'))`, '0'],
+      // [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the object Player1 as its argument\nPrint its return value.`, `print(getScore(Player1))`, '0'],
+      // [`Mr. Smith`, `Define a function called 'doNothing'\nIt returns nothing`, `def doNothing():\n\treturn`, '0'],
+      // [`Mr. Smith`, `Call a function called rollDice\nStore its return value in a variable called 'dieResult'`, `dieResult = rollDice()`, '0'],
+      // [`Mr. Smith`, `Define a function called sayMessage\nIt takes an argument called 'msg'\nIt prints the 'msg' argument`, `def sayMessage(msg):\n\tprint(msg)`, '0'],
+      // [`Mr. Smith`, `Define a function called convertAdd()\nIt takes two arguments called 'a' and 'b'\nIt returns 'a' converted to an integer plus 'b' converted to an integer `, `def convertAdd(a, b):\n\treturn int(a) + int(b)`, '0'],
+      ['Ethan', 'Nice', ['Fortnite', 'COD', 'RavenField', 'Minecraft'], '1', '3']
     ]
 
     var data_basics = [
@@ -132,21 +132,42 @@
         results.innerHTML = 'You already submitted this card!'
       } else {
         cardSubmitted = true;
+        var ele = document.getElementsByName('choice')
+        for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                var eleValue= ele[i].value
+              }
+        if (data[cardIndex][4] === eleValue) {
+          console.log("You win")
+          results.innerHTML = `<span style="color: green; font-family: system, consolas;">` + eleValue + `</span>`;
+          discardPile++;
+          data.splice(cardIndex, 1)
+        } else {
+          console.log("You SUCK")
+          results.innerHTML = `<span style="color: red; font-family: system, consolas;">` + eleValue + `</span>`;
+          mistakePile.push(mistakePile.splice(cardIndex, 1)[0]);
+        }
       }
     }
 
     function questionType() {
       let answerBox = document.getElementById('answerbox');
       let multChoiceBtn = document.getElementById('multiplechoice');
-      let multchoice1 = document.getElementById("mult1");
+      let multchoice1 = document.getElementById("mult1choice");
+      let multchoice2 = document.getElementById("mult2choice");
+      let multchoice3 = document.getElementById("mult3choice");
+      let multchoice4 = document.getElementById("mult4choice");
       if (data[cardIndex][3] === '0') {
         answerBox.style.display = "block"
         multChoiceBtn.style.display = "none"
       } else if (data[cardIndex][3] === '1') {
         answerBox.style.display = "none"
         multChoiceBtn.style.display = "block"
-        xyz = str(data[cardIndex][2][1])
-        multchoice1.innerHTML = xyz;
+        xyz = data[cardIndex][2]
+        multchoice1.innerHTML = xyz[0];
+        multchoice2.innerHTML = xyz[1];
+        multchoice3.innerHTML = xyz[2];
+        multchoice4.innerHTML = xyz[3];
       }
     }
   </script>
@@ -173,24 +194,30 @@
     <br>
     <div id="answerbox">
     <textarea rows=4 cols=40 id="cardAnswer" style="white-space: pre-wrap; font-family: system, consolas;"></textarea><br>
+    <div id="buttons">
+      <button type="button" onclick="submitCard()">Submit</button>
+      <button type="button" onclick="nextCard()">Next Card</button>
+    </div>
     </div>
     <div id="multiplechoice">
-      <form >
-
-        <input type="radio" name="choice" id="mult1">
-
+      <form id="choiceAnswer">
+        <input type="radio" name="choice" id="mult1" value="1">
+        <label for="mult1" id=mult1choice>hey</label>
         <br>
-        <input type="radio" name="choice" id="mult2"> Programming
+        <input type="radio" name="choice" id="mult2" value="2">
+        <label for="mult2" id=mult2choice>hey</label>
         <br>
-        <input type="radio" name="choice" id="mult3"> Application
+        <input type="radio" name="choice" id="mult3" value="3">
+        <label for="mult3" id=mult3choice>hey</label>
         <br>
-        <input type="radio" name="choice" id="mult4"> None of These
+        <input type="radio" name="choice" id="mult4" value="4">
+        <label for="mult4" id=mult4choice>hey</label>
       </form>
-    </div>
       <div id="buttons">
-        <button type="button" onclick="submitCard()">Submit</button>
+        <button type="button" onclick="submitChoice()">Submit</button>
         <button type="button" onclick="nextCard()">Next Card</button>
       </div>
+    </div>
       <div id="results">
       </div>
     </div>
