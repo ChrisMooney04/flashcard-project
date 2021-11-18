@@ -50,7 +50,10 @@ h1 {
 
  #buttons{
    text-align: center;
-   width: 100%;
+
+   padding-top:
+   width: 98%;
+
    /*width: 100px;*/
 
  }
