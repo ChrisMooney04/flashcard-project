@@ -10,10 +10,10 @@
     var discardPile = 0;
     var mistakePile = []
     var data_functions = [
-      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '1'],
-      [`Mr. Smith`, `Define a function called 'myName'\nIt returns the string 'Jeff'`, `def myName():\n\treturn 'Jeff'`, '1'],
-      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '1'],
-      [`Mr. Smith`, `Define a function called 'kick'\nIt takes one argument called targetHP\nIt returns targetHP - 2`, `def kick(targetHP):\n\treturn targetHP - 2`, '1'],
+      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '0'],
+      [`Mr. Smith`, `Define a function called 'myName'\nIt returns the string 'Jeff'`, `def myName():\n\treturn 'Jeff'`, '0'],
+      [`Mr. Smith`, `Define a function called 'kick'\nIt prints the string 'Ouch!'`, `def kick():\n\tprint('Ouch!')`, '0'],
+      [`Mr. Smith`, `Define a function called 'kick'\nIt takes one argument called targetHP\nIt returns targetHP - 2`, `def kick(targetHP):\n\treturn targetHP - 2`, '0'],
       [`Mr. Smith`, `Call a function called 'kick'\nIt takes the object Player1 as its argument.\nStore its return value to the property 'Player1.hp'`, `Player1.hp = kick(Player1)`, '0'],
       [`Mr. Smith`, `Call a function called 'myName'\nPrint its return value.`, `print(myName())`, '0'],
       [`Mr. Smith`, `Call a function called 'getScore'\nIt takes the string 'Player1' as its argument.\Convert its return value to an integer and store it to a variable called 'score'.`, `score = int(getScore('Player1'))`, '0'],
@@ -22,6 +22,7 @@
       [`Mr. Smith`, `Call a function called rollDice\nStore its return value in a variable called 'dieResult'`, `dieResult = rollDice()`, '0'],
       [`Mr. Smith`, `Define a function called sayMessage\nIt takes an argument called 'msg'\nIt prints the 'msg' argument`, `def sayMessage(msg):\n\tprint(msg)`, '0'],
       [`Mr. Smith`, `Define a function called convertAdd()\nIt takes two arguments called 'a' and 'b'\nIt returns 'a' converted to an integer plus 'b' converted to an integer `, `def convertAdd(a, b):\n\treturn int(a) + int(b)`, '0'],
+      ['Ethan', 'Nice', ['A', 'B', 'C', 'D'], '1', '3']
     ]
 
     var data_basics = [
@@ -55,7 +56,7 @@
     var cardIndex = 0;
 
     //Pick out a certain number of cards
-    var numberOfCards = 10;
+    var numberOfCards = data_functions.length;
     for (let i = 0; i < numberOfCards; i++) {
       data.push(dataList.splice(Math.floor(Math.random() * dataList.length), 1)[0])
     }
@@ -136,13 +137,16 @@
 
     function questionType() {
       let answerBox = document.getElementById('answerbox');
-      let multChoiceBtn = document.getElementById('multiplechoice')
+      let multChoiceBtn = document.getElementById('multiplechoice');
+      let multchoice1 = document.getElementById("mult1");
       if (data[cardIndex][3] === '0') {
         answerBox.style.display = "block"
         multChoiceBtn.style.display = "none"
       } else if (data[cardIndex][3] === '1') {
         answerBox.style.display = "none"
         multChoiceBtn.style.display = "block"
+        xyz = str(data[cardIndex][2][1])
+        multchoice1.innerHTML = xyz;
       }
     }
   </script>
@@ -172,13 +176,13 @@
     </div>
     <div id="multiplechoice">
       <form >
-        <input type="radio" name="choice" value="Scripting">
+        <input type="radio" name="choice" id="mult1">
         <br>
-        <input type="radio" name="choice" value="Programming"> Programming
+        <input type="radio" name="choice" id="mult2"> Programming
         <br>
-        <input type="radio" name="choice" value="Application"> Application
+        <input type="radio" name="choice" id="mult3"> Application
         <br>
-        <input type="radio" name="choice" value="None of These"> None of These
+        <input type="radio" name="choice" id="mult4"> None of These
       </form>
     </div>
     <div id="buttons">
