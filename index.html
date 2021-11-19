@@ -133,10 +133,10 @@
       } else {
         cardSubmitted = true;
         var ele = document.getElementsByName('choice')
-        for(i = 0; i < ele.length; i++) {
-                if(ele[i].checked)
-                var eleValue= ele[i].value
-              }
+        for (i = 0; i < ele.length; i++) {
+          if (ele[i].checked)
+            var eleValue = ele[i].value
+        }
         if (data[cardIndex][4] === eleValue) {
           console.log("You win")
           results.innerHTML = `<span style="color: green; font-family: system, consolas;">` + eleValue + `</span>`;
@@ -193,11 +193,11 @@
     </div>
     <br>
     <div id="answerbox">
-    <textarea rows=4 cols=40 id="cardAnswer" style="white-space: pre-wrap; font-family: system, consolas;"></textarea><br>
-    <div id="buttons">
-      <button type="button" onclick="submitCard()">Submit</button>
-      <button type="button" onclick="nextCard()">Next Card</button>
-    </div>
+      <textarea rows=4 cols=40 id="cardAnswer" style="white-space: pre-wrap; font-family: system, consolas;"></textarea><br>
+      <div id="buttons">
+        <button type="button" onclick="submitCard()">Submit</button>
+        <button type="button" onclick="nextCard()">Next Card</button>
+      </div>
     </div>
     <div id="multiplechoice">
       <form id="choiceAnswer">
@@ -218,9 +218,9 @@
         <button type="button" onclick="nextCard()">Next Card</button>
       </div>
     </div>
-      <div id="results">
-      </div>
+    <div id="results">
     </div>
+  </div>
   <script type="text/javascript">
     nextCard();
     document.getElementById('cardAnswer').addEventListener('keydown', function(e) {
