@@ -101,7 +101,7 @@
           cardPrompt.innerHTML = '<b>' + mistakePile[cardIndex][0] + ':</b><br>' + parseMeta(mistakePile[cardIndex][1]);
 
         } else {
-          cardPrompt.innerHTML = '<b>You win!</b>'
+          cardPrompt.innerHTML = '<h1><b>You win!</b></h1>' + '<button type="button" onclick="resetCards()">Reset</button>'
           answerBox.style.display = "none"
           multChoiceBtn.style.display = "none"
         }
@@ -209,6 +209,9 @@
         multchoice4.innerHTML = xyz[3];
       }
     }
+    function resetCards() {
+      location.reload();
+    }
   </script>
 </head>
 
@@ -232,7 +235,7 @@
     </div>
     <br>
     <div id="answerbox">
-      <textarea rows=4 cols=40 id="cardAnswer" style="white-space: pre-wrap; font-family: system, consolas;"></textarea><br>
+      <textarea rows=4 cols=40 id="cardAnswer" class="answerBoxFormat" style="white-space: pre-wrap; font-family: system, consolas;"></textarea><br>
       <div id="buttons">
         <button type="button" onclick="submitCard()">Submit</button>
         <button type="button" onclick="nextCard()">Next Card</button>
