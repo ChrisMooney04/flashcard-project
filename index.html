@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>PyFlashCards</title>
+  <title>FlashCards</title>
   <link rel="stylesheet" href="style.css">
   <script type="text/javascript">
     var cardSubmitted = true;
@@ -81,6 +81,8 @@
     }
 
     function nextCard() {
+      let answerBox = document.getElementById('answerbox');
+      let multChoiceBtn = document.getElementById('multiplechoice');
       var results = document.getElementById('results')
       if (!cardSubmitted) {
         results.innerHTML = 'You need to submit an answer to this card first!'
@@ -100,6 +102,8 @@
 
         } else {
           cardPrompt.innerHTML = '<b>You win!</b>'
+          answerBox.style.display = "none"
+          multChoiceBtn.style.display = "none"
         }
         document.getElementById('cardAnswer').value = '';
         document.getElementById('cardAnswer').focus();
@@ -119,7 +123,7 @@
         let cardCheck = cardAnswer.replaceAll(' ', '')
         cardCheck = cardCheck.replaceAll('\"', '\'')
         if (data.length) {
-          if (cardCheck == data[cardIndex][1].replaceAll(' ', '')) {
+          if (cardCheck == data[cardIndex][2].replaceAll(' ', '')) {
             discardPile++;
             results.innerHTML = `<span style="color: green; font-family: system, consolas;">` + parseMeta(data[cardIndex][2]) + `</span>`;
             data.splice(cardIndex, 1)
@@ -212,7 +216,7 @@
   <div id="content">
 
     <div id="header">
-      <h1>PyFlashCards</h1>
+      <h1>FlashCards</h1>
       <li>Type the lines of code described in the prompt.</li>
       <li>If the description talks about something that would use </li>
       <li id="line2">a code block (function, conditional statement, etc), only use the first line of code.</li>
